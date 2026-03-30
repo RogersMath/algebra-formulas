@@ -19,7 +19,6 @@
   --cream: #FFF8E7;
   --cream-paper: #FAF7F0;
   --black: #000000;
-  --light-gray: #D9D9D9;
 }
 
 /* GLOBAL */
@@ -62,6 +61,7 @@ header h1 {
   width: 36px;
   height: 30px;
   cursor: pointer;
+  z-index: 3001;
 }
 .hamburger span {
   display: block;
@@ -71,7 +71,22 @@ header h1 {
   border-radius: 4px;
 }
 
-/* SLIDE-OUT MENU */
+/* SIDE MENU + OVERLAY */
+#menuOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 2500;
+}
+
+#menuOverlay.active {
+  display: block;
+}
+
 .side-menu {
   position: fixed;
   top: 0;
@@ -107,7 +122,7 @@ header h1 {
   margin-top: 120px;
   position: relative;
   overflow-x: hidden;
-  height: calc(100vh - 120px);
+  min-height: calc(100vh - 120px);
 }
 
 /* SECTION TRANSITIONS */
@@ -150,38 +165,36 @@ header h1 {
   margin: 0 0 0.3rem 0;
 }
 
+/* RESPONSIVE GRID */
+.formula-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 800px) {
+  .formula-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 /* FORMULA CARD */
 .formula-card {
   background: var(--cream);
   padding: 1rem;
-  margin-bottom: 1rem;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
-
-/* TAP ZONES */
-.tap-left, .tap-right {
-  position: fixed;
-  top: 120px;
-  bottom: 0;
-  width: 50px;
-  background: rgba(140,140,140,0.12);
-  z-index: 1500;
-}
-.tap-left { left: 0; }
-.tap-right { right: 0; }
-.tap-left:hover, .tap-right:hover {
-  background: rgba(140,140,140,0.22);
-}
-
 </style>
 </head>
 
 <body>
 
+<!-- CLICK-OFF OVERLAY -->
+<div id="menuOverlay"></div>
+
 <!-- HEADER -->
 <header>
-  <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
+  <div class="hamburger" id="hamburger">
     <span></span><span></span><span></span>
   </div>
   <h1>Intermediate Algebra<br>Formula Sheet</h1>
@@ -189,16 +202,12 @@ header h1 {
 
 <!-- SIDE MENU -->
 <nav class="side-menu" id="sidemenu">
-  <a href="#" class="menu-link" data-target="linear">Linear</a>
-  <a href="#" class="menu-link" data-target="quadratics">Quadratics</a>
-  <a href="#" class="menu-link" data-target="exponents">Exponents</a>
-  <a href="#" class="menu-link" data-target="polynomials">Polynomials</a>
-  <a href="#" class="menu-link" data-target="functions">Functions</a>
+  <a class="menu-link" data-target="linear" href="#">Linear Equations</a>
+  <a class="menu-link" data-target="quadratics" href="#">Quadratics</a>
+  <a class="menu-link" data-target="exponents" href="#">Exponents</a>
+  <a class="menu-link" data-target="polynomials" href="#">Polynomials</a>
+  <a class="menu-link" data-target="functions" href="#">Functions</a>
 </nav>
-
-<!-- TAP ZONES -->
-<div class="tap-left" id="tapLeft"></div>
-<div class="tap-right" id="tapRight"></div>
 
 <!-- MAIN WRAPPER -->
 <div class="main-wrapper">
@@ -207,29 +216,33 @@ header h1 {
 <section class="section active" id="linear">
   <h2 class="family-title">Linear Equations & Coordinate Geometry</h2>
 
-  <div class="formula-card">
-    <h3 class="formula-title">Slope</h3>
-    $$m = \frac{y_2 - y_1}{x_2 - x_1}$$
-  </div>
+  <div class="formula-grid">
 
-  <div class="formula-card">
-    <h3 class="formula-title">Point–Slope Form</h3>
-    $$y - y_1 = m(x - x_1)$$
-  </div>
+    <div class="formula-card">
+      <h3 class="formula-title">Slope</h3>
+      $$m = \frac{y_2 - y_1}{x_2 - x_1}$$
+    </div>
 
-  <div class="formula-card">
-    <h3 class="formula-title">Slope–Intercept Form</h3>
-    $$y = mx + b$$
-  </div>
+    <div class="formula-card">
+      <h3 class="formula-title">Point–Slope Form</h3>
+      $$y - y_1 = m(x - x_1)$$
+    </div>
 
-  <div class="formula-card">
-    <h3 class="formula-title">Midpoint</h3>
-    $$M = \left(\frac{x_1+x_2}{2},\,\frac{y_1+y_2}{2}\right)$$
-  </div>
+    <div class="formula-card">
+      <h3 class="formula-title">Slope–Intercept Form</h3>
+      $$y = mx + b$$
+    </div>
 
-  <div class="formula-card">
-    <h3 class="formula-title">Distance</h3>
-    $$d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$$
+    <div class="formula-card">
+      <h3 class="formula-title">Midpoint</h3>
+      $$M = \left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right)$$
+    </div>
+
+    <div class="formula-card">
+      <h3 class="formula-title">Distance</h3>
+      $$d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$$
+    </div>
+
   </div>
 </section>
 
@@ -237,34 +250,38 @@ header h1 {
 <section class="section" id="quadratics">
   <h2 class="family-title">Quadratics</h2>
 
-  <div class="formula-card">
-    <h3 class="formula-title">Standard Form</h3>
-    $$y = ax^2 + bx + c$$
-  </div>
+  <div class="formula-grid">
 
-  <div class="formula-card">
-    <h3 class="formula-title">Vertex Form</h3>
-    $$y = a(x-h)^2 + k$$
-  </div>
+    <div class="formula-card">
+      <h3 class="formula-title">Standard Form</h3>
+      $$y = ax^2 + bx + c$$
+    </div>
 
-  <div class="formula-card">
-    <h3 class="formula-title">Factored Form</h3>
-    $$y = a(x-r_1)(x-r_2)$$
-  </div>
+    <div class="formula-card">
+      <h3 class="formula-title">Vertex Form</h3>
+      $$y = a(x-h)^2 + k$$
+    </div>
 
-  <div class="formula-card">
-    <h3 class="formula-title">Quadratic Formula</h3>
-    $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
-  </div>
+    <div class="formula-card">
+      <h3 class="formula-title">Factored Form</h3>
+      $$y = a(x-r_1)(x-r_2)$$
+    </div>
 
-  <div class="formula-card">
-    <h3 class="formula-title">Discriminant</h3>
-    $$D = b^2 - 4ac$$
-  </div>
+    <div class="formula-card">
+      <h3 class="formula-title">Quadratic Formula</h3>
+      $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+    </div>
 
-  <div class="formula-card">
-    <h3 class="formula-title">Axis of Symmetry</h3>
-    $$x = -\frac{b}{2a}$$
+    <div class="formula-card">
+      <h3 class="formula-title">Discriminant</h3>
+      $$D = b^2 - 4ac$$
+    </div>
+
+    <div class="formula-card">
+      <h3 class="formula-title">Axis of Symmetry</h3>
+      $$x = -\frac{b}{2a}$$
+    </div>
+
   </div>
 </section>
 
@@ -272,33 +289,49 @@ header h1 {
 <section class="section" id="exponents">
   <h2 class="family-title">Exponents & Radicals</h2>
 
-  <div class="formula-card"><h3 class="formula-title">Product Rule</h3>$$a^m a^n = a^{m+n}$$</div>
-  <div class="formula-card"><h3 class="formula-title">Quotient Rule</h3>$$\frac{a^m}{a^n} = a^{m-n}$$</div>
-  <div class="formula-card"><h3 class="formula-title">Power Rule</h3>$$(a^m)^n = a^{mn}$$</div>
-  <div class="formula-card"><h3 class="formula-title">Radical Product</h3>$$\sqrt{ab}=\sqrt{a}\sqrt{b}$$</div>
-  <div class="formula-card"><h3 class="formula-title">Fractional Exponent</h3>$$a^{1/n} = \sqrt[n]{a}$$</div>
+  <div class="formula-grid">
+
+    <div class="formula-card"><h3 class="formula-title">Product Rule</h3>$$a^m a^n = a^{m+n}$$</div>
+
+    <div class="formula-card"><h3 class="formula-title">Quotient Rule</h3>$$\frac{a^m}{a^n} = a^{m-n}$$</div>
+
+    <div class="formula-card"><h3 class="formula-title">Power Rule</h3>$$(a^m)^n = a^{mn}$$</div>
+
+    <div class="formula-card"><h3 class="formula-title">Radical Product</h3>$$\sqrt{ab} = \sqrt{a}\sqrt{b}$$</div>
+
+    <div class="formula-card"><h3 class="formula-title">Fractional Exponent</h3>$$a^{1/n}=\sqrt[n]{a}$$</div>
+
+  </div>
 </section>
 
 <!-- ======================= POLYNOMIALS ======================= -->
 <section class="section" id="polynomials">
   <h2 class="family-title">Polynomial Factoring</h2>
 
-  <div class="formula-card"><h3 class="formula-title">Difference of Squares</h3>$$a^2 - b^2 = (a-b)(a+b)$$</div>
-  <div class="formula-card"><h3 class="formula-title">Sum of Cubes</h3>$$a^3 + b^3 = (a+b)(a^2 - ab + b^2)$$</div>
-  <div class="formula-card"><h3 class="formula-title">Difference of Cubes</h3>$$a^3 - b^3 = (a-b)(a^2 + ab + b^2)$$</div>
+  <div class="formula-grid">
+
+    <div class="formula-card"><h3 class="formula-title">Difference of Squares</h3>$$a^2-b^2=(a-b)(a+b)$$</div>
+    <div class="formula-card"><h3 class="formula-title">Sum of Cubes</h3>$$a^3+b^3=(a+b)(a^2-ab+b^2)$$</div>
+    <div class="formula-card"><h3 class="formula-title">Difference of Cubes</h3>$$a^3-b^3=(a-b)(a^2+ab+b^2)$$</div>
+
+  </div>
 </section>
 
 <!-- ======================= FUNCTIONS ======================= -->
 <section class="section" id="functions">
   <h2 class="family-title">Functions</h2>
 
-  <div class="formula-card">
-    <h3 class="formula-title">Average Rate of Change</h3>
-    $$\frac{f(b)-f(a)}{b-a}$$
+  <div class="formula-grid">
+
+    <div class="formula-card">
+      <h3 class="formula-title">Average Rate of Change</h3>
+      $$\frac{f(b)-f(a)}{b-a}$$
+    </div>
+
   </div>
 </section>
 
-</div> <!-- end wrapper -->
+</div><!-- end wrapper -->
 
 <!-- SCRIPT -->
 <script>
@@ -307,41 +340,39 @@ let currentIndex = 0;
 
 const sidemenu = document.getElementById("sidemenu");
 const hamburger = document.getElementById("hamburger");
+const menuOverlay = document.getElementById("menuOverlay");
 
-// Toggle menu
-hamburger.addEventListener("click", () => sidemenu.classList.toggle("open"));
+/* MENU OPEN/CLOSE */
+hamburger.addEventListener("click", () => {
+  sidemenu.classList.toggle("open");
+  menuOverlay.classList.toggle("active");
+});
+
+menuOverlay.addEventListener("click", () => {
+  sidemenu.classList.remove("open");
+  menuOverlay.classList.remove("active");
+});
 
 document.querySelectorAll(".menu-link").forEach(link => {
   link.addEventListener("click", e => {
     e.preventDefault();
     sidemenu.classList.remove("open");
+    menuOverlay.classList.remove("active");
     navigateTo(sections.indexOf(link.dataset.target));
   });
 });
 
-// Navigation logic
+/* SECTION NAVIGATION */
 function navigateTo(index) {
   if (index < 0 || index >= sections.length || index === currentIndex) return;
 
-  const oldSection = document.getElementById(sections[currentIndex]);
-  const newSection = document.getElementById(sections[index]);
-
-  oldSection.classList.remove("active");
-
-  newSection.classList.add("active");
+  document.getElementById(sections[currentIndex]).classList.remove("active");
+  document.getElementById(sections[index]).classList.add("active");
 
   currentIndex = index;
 }
 
-// Tap zones navigation
-document.getElementById("tapLeft").addEventListener("click", () =>
-  navigateTo(currentIndex - 1)
-);
-document.getElementById("tapRight").addEventListener("click", () =>
-  navigateTo(currentIndex + 1)
-);
-
-// Swipe navigation
+/* SWIPE NAVIGATION */
 let startX = 0;
 
 window.addEventListener("touchstart", e => {
@@ -350,9 +381,10 @@ window.addEventListener("touchstart", e => {
 
 window.addEventListener("touchend", e => {
   let endX = e.changedTouches[0].clientX;
-  if (startX - endX > 50) navigateTo(currentIndex + 1);
-  if (endX - startX > 50) navigateTo(currentIndex - 1);
+  if (startX - endX > 50) navigateTo(currentIndex + 1);  // left swipe
+  if (endX - startX > 50) navigateTo(currentIndex - 1);  // right swipe
 }, { passive: true });
+
 </script>
 
 </body>
