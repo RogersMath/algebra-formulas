@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Intermediate Algebra Formula Sheet</title>
+
+<!-- GOOGLE FONTS (CORRECTED) -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- MATHJAX (CORRECTED) -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+<style>
+:root {
+  --navy1: #08152C;
+  --navy2: #1A3B6E;
+  --cream: #FFF8E7;
+  --cream-paper: #FAF7F0;
+  --black: #000000;
+  --light-gray: #D9D9D9;
+}
+
+/* GLOBAL */
+body {
+  margin: 0;
+  font-family: "Playfair Display", serif;
+  background: var(--cream-paper);
+  color: var(--black);
+  line-height: 1.6;
+  overflow-x: hidden;
+  user-select: none;
+}
+
+/* FIXED HEADER */
+header {
+  background: linear-gradient(to bottom, var(--navy1), var(--navy2));
+  padding: 1.2rem 1rem;
+  text-align: center;
+  color: var(--cream);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.7rem;
+  font-family: "Cinzel", serif;
+  line-height: 1.25;
+}
+
+/* HAMBURGER */
+.hamburger {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  width: 36px;
+  height: 30px;
+  cursor: pointer;
+}
+.hamburger span {
+  display: block;
+  height: 5px;
+  margin: 6px 0;
+  background: var(--cream);
+  border-radius: 4px;
+}
+
+/* SLIDE-OUT MENU */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 260px;
+  height: 100%;
+  background: var(--navy1);
+  color: var(--cream);
+  padding-top: 5rem;
+  transition: left .25s ease;
+  z-index: 3000;
+}
+
+.side-menu.open {
+  left: 0;
+}
+
+.menu-link {
+  display: block;
+  padding: 1rem 1.2rem;
+  color: var(--cream);
+  font-size: 1.2rem;
+  font-family: "Cinzel", serif;
+  text-decoration: none;
+  border-bottom: 1px solid var(--navy2);
+}
+.menu-link:hover {
+  background: var(--navy2);
+}
+
+/* MAIN WRAPPER */
+.main-wrapper {
+  margin-top: 120px;
+  position: relative;
+  overflow-x: hidden;
+  height: calc(100vh - 120px);
+}
+
+/* SECTION TRANSITIONS */
+.section {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  padding: 1rem;
+  opacity: 0;
+  transform: translateX(20px);
+  transition:
+      transform 0.22s cubic-bezier(0.22, 0.61, 0.36, 1),
+      opacity 0.22s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.section.active {
+  left: 0;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* HEADINGS */
+.family-title {
+  font-family: "Cinzel", serif;
+  font-size: 1.7rem;
+  color: var(--navy1);
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+/* FORMULA SUBTITLE GRADIENT */
+.formula-title {
+  font-family: "Cinzel", serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: linear-gradient(to right, var(--navy1), var(--navy2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 0.3rem 0;
+}
+
+/* FORMULA CARD */
+.formula-card {
+  background: var(--cream);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* TAP ZONES */
+.tap-left, .tap-right {
+  position: fixed;
+  top: 120px;
+  bottom: 0;
+  width: 50px;
+  background: rgba(140,140,140,0.12);
+  z-index: 1500;
+}
+.tap-left { left: 0; }
+.tap-right { right: 0; }
+.tap-left:hover, .tap-right:hover {
+  background: rgba(140,140,140,0.22);
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
+    <span></span><span></span><span></span>
+  </div>
+  <h1>Intermediate Algebra<br>Formula Sheet</h1>
+</header>
+
+<!-- SIDE MENU -->
+<nav class="side-menu" id="sidemenu">
+  <a href="#" class="menu-link" data-target="linear">Linear</a>
+  <a href="#" class="menu-link" data-target="quadratics">Quadratics</a>
+  <a href="#" class="menu-link" data-target="exponents">Exponents</a>
+  <a href="#" class="menu-link" data-target="polynomials">Polynomials</a>
+  <a href="#" class="menu-link" data-target="functions">Functions</a>
+</nav>
+
+<!-- TAP ZONES -->
+<div class="tap-left" id="tapLeft"></div>
+<div class="tap-right" id="tapRight"></div>
+
+<!-- MAIN WRAPPER -->
+<div class="main-wrapper">
+
+<!-- ======================= LINEAR ======================= -->
+<section class="section active" id="linear">
+  <h2 class="family-title">Linear Equations & Coordinate Geometry</h2>
+
+  <div class="formula-card">
+    <h3 class="formula-title">Slope</h3>
+    $$m = \frac{y_2 - y_1}{x_2 - x_1}$$
+  </div>
+
+  <div class="formula-card">
+    <h3 class="formula-title">Point–Slope Form</h3>
+    $$y - y_1 = m(x - x_1)$$
+  </div>
+
+  <div class="formula-card">
+    <h3 class="formula-title">Slope–Intercept Form</h3>
+    $$y = mx + b$$
+  </div>
+
+  <div class="formula-card">
+    <h3 class="formula-title">Midpoint</h3>
+    $$M = \left(\frac{x_1+x_2}{2},\,\frac{y_1+y_2}{2}\right)$$
+  </div>
+
+  <div class="formula-card">
+    <h3 class="formula-title">Distance</h3>
+    $$d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$$
+  </div>
+</section>
+
+<!-- ======================= QUADRATICS ======================= -->
+<section class="section" id="quadratics">
+  <h2 class="family-title">Quadratics</h2>
+
+  <div class="formula-card">
+    <h3 class="formula-title">Standard Form</h3>
+    $$y = ax^2 + bx + c$$
+  </div>
+
+  <div class="formula-card">
+    <h3 class="formula-title">Vertex Form</h3>
+    $$y = a(x-h)^2 + k$$
+  </div>
+
+  <div class="formula-card">
+    <h3 class="formula-title">Factored Form</h3>
+    $$y = a(x-r_1)(x-r_2)$$
+  </div>
+
+  <div class="formula-card">
+    <h3 class="formula-title">Quadratic Formula</h3>
+    $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+  </div>
+
+  <div class="formula-card">
+    <h3 class="formula-title">Discriminant</h3>
+    $$D = b^2 - 4ac$$
+  </div>
+
+  <div class="formula-card">
+    <h3 class="formula-title">Axis of Symmetry</h3>
+    $$x = -\frac{b}{2a}$$
+  </div>
+</section>
+
+<!-- ======================= EXPONENTS ======================= -->
+<section class="section" id="exponents">
+  <h2 class="family-title">Exponents & Radicals</h2>
+
+  <div class="formula-card"><h3 class="formula-title">Product Rule</h3>$$a^m a^n = a^{m+n}$$</div>
+  <div class="formula-card"><h3 class="formula-title">Quotient Rule</h3>$$\frac{a^m}{a^n} = a^{m-n}$$</div>
+  <div class="formula-card"><h3 class="formula-title">Power Rule</h3>$$(a^m)^n = a^{mn}$$</div>
+  <div class="formula-card"><h3 class="formula-title">Radical Product</h3>$$\sqrt{ab}=\sqrt{a}\sqrt{b}$$</div>
+  <div class="formula-card"><h3 class="formula-title">Fractional Exponent</h3>$$a^{1/n} = \sqrt[n]{a}$$</div>
+</section>
+
+<!-- ======================= POLYNOMIALS ======================= -->
+<section class="section" id="polynomials">
+  <h2 class="family-title">Polynomial Factoring</h2>
+
+  <div class="formula-card"><h3 class="formula-title">Difference of Squares</h3>$$a^2 - b^2 = (a-b)(a+b)$$</div>
+  <div class="formula-card"><h3 class="formula-title">Sum of Cubes</h3>$$a^3 + b^3 = (a+b)(a^2 - ab + b^2)$$</div>
+  <div class="formula-card"><h3 class="formula-title">Difference of Cubes</h3>$$a^3 - b^3 = (a-b)(a^2 + ab + b^2)$$</div>
+</section>
+
+<!-- ======================= FUNCTIONS ======================= -->
+<section class="section" id="functions">
+  <h2 class="family-title">Functions</h2>
+
+  <div class="formula-card">
+    <h3 class="formula-title">Average Rate of Change</h3>
+    $$\frac{f(b)-f(a)}{b-a}$$
+  </div>
+</section>
+
+</div> <!-- end wrapper -->
+
+<!-- SCRIPT -->
+<script>
+const sections = ["linear","quadratics","exponents","polynomials","functions"];
+let currentIndex = 0;
+
+const sidemenu = document.getElementById("sidemenu");
+const hamburger = document.getElementById("hamburger");
+
+// Toggle menu
+hamburger.addEventListener("click", () => sidemenu.classList.toggle("open"));
+
+document.querySelectorAll(".menu-link").forEach(link => {
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    sidemenu.classList.remove("open");
+    navigateTo(sections.indexOf(link.dataset.target));
+  });
+});
+
+// Navigation logic
+function navigateTo(index) {
+  if (index < 0 || index >= sections.length || index === currentIndex) return;
+
+  const oldSection = document.getElementById(sections[currentIndex]);
+  const newSection = document.getElementById(sections[index]);
+
+  oldSection.classList.remove("active");
+
+  newSection.classList.add("active");
+
+  currentIndex = index;
+}
+
+// Tap zones navigation
+document.getElementById("tapLeft").addEventListener("click", () =>
+  navigateTo(currentIndex - 1)
+);
+document.getElementById("tapRight").addEventListener("click", () =>
+  navigateTo(currentIndex + 1)
+);
+
+// Swipe navigation
+let startX = 0;
+
+window.addEventListener("touchstart", e => {
+  startX = e.touches[0].clientX;
+}, { passive: true });
+
+window.addEventListener("touchend", e => {
+  let endX = e.changedTouches[0].clientX;
+  if (startX - endX > 50) navigateTo(currentIndex + 1);
+  if (endX - startX > 50) navigateTo(currentIndex - 1);
+}, { passive: true });
+</script>
+
+</body>
+</html>
