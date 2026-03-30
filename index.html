@@ -183,24 +183,22 @@ main {
 
 /* FOOTER */
 footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   background: var(--navy1);
   color: var(--cream);
   text-align: center;
   padding: 1rem;
   font-family: "Cinzel", serif;
-  margin-top: 1rem;
+  z-index: 2000;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.3);
 }
-
 footer a {
   color: var(--cream);
   text-decoration: none;
   font-weight: bold;
-  position: relative;
-}
-
-/* Remove all hover reveal effects */
-footer a:hover::after {
-  content: "";
 }
 
 </style>
