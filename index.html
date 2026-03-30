@@ -190,15 +190,29 @@ footer {
   background: var(--navy1);
   color: var(--cream);
   text-align: center;
-  padding: 1rem 1.5rem;   /* <-- Add horizontal padding */
-  font-family: "Cinzel", serif;
+
+  /* Smaller, narrower font */
+  font-family: "Lato", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+
+  padding: 0.8rem 1rem;
   z-index: 2000;
   box-shadow: 0 -2px 4px rgba(0,0,0,0.3);
+
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
+
 footer a {
   color: var(--cream);
   text-decoration: none;
-  font-weight: bold;
+}
+
+/* Remove all hover reveal effects */
+footer a:hover::after {
+  content: "";
 }
 
 </style>
@@ -318,7 +332,8 @@ footer a {
 <!-- FOOTER -->
 <footer>
   <a href="https://pbsc.edu/slc/" target="_blank" rel="noopener">
-    Want free tutoring to help you perform at your very best? PBSC students click here
+    Want tutors to help you perform at your very best?<br>
+    PBSC students click here
   </a>
 </footer>
 
